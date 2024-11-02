@@ -2,6 +2,7 @@
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Context;
+using System.Linq.Expressions;
 
 namespace Persistence.Repositories.UserRepository
 {
@@ -21,6 +22,15 @@ namespace Persistence.Repositories.UserRepository
                 .Include(x=>x.Role)
                 .Where(x=>x.DeletedDate==null)
                 .ToListAsync();
+            return values;
+        }
+
+        public async Task<User> GetByFilterAsync(Expression<Func<User, bool>> filter)
+        {
+            var values = await _context.Users.Where(filter)
+                .Include(x => x.BloodType)
+                .Include(x => x.Role)
+                .FirstOrDefaultAsync();
             return values;
         }
 

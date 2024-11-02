@@ -5,13 +5,17 @@ using Application.Interfaces.DonationInterface;
 using Application.Interfaces.RequestInterface;
 using Application.Interfaces.UserInterface;
 using Application.Servicess;
+using Application.Tools;
 using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Persistence.Context;
 using Persistence.Repositories;
 using Persistence.Repositories.BloodStockRepository;
 using Persistence.Repositories.DonationRepository;
 using Persistence.Repositories.RequestRepository;
 using Persistence.Repositories.UserRepository;
+using System.Text;
 
 namespace WebApi
 {
@@ -20,6 +24,20 @@ namespace WebApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+            {
+                opt.RequireHttpsMetadata = false; //çok tavsiye edilen biþey deðil ama þimdilik güvenliði biraz yumuþattýk.
+                opt.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidAudience = JwtTokenDefaults.ValidAudience,
+                    ValidIssuer = JwtTokenDefaults.ValidIssuer,
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)),
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true
+                };
+            });
 
             // Add services to the container.
             builder.Services.AddScoped<KanBankasýContext>();
@@ -56,6 +74,7 @@ namespace WebApi
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
