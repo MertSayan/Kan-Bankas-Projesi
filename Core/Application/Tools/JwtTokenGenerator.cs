@@ -23,6 +23,9 @@ namespace Application.Tools
             if (!string.IsNullOrWhiteSpace(result.Email))
                 claims.Add(new Claim("Email",result.Email));
 
+            claims.Add(new Claim("BloodTypeId", result.BloodTypeName.ToString()));
+            claims.Add(new Claim("UserNameSurname", result.Name+" "+result.Surname.ToString()));
+
             var key=new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtTokenDefaults.Key)); 
 
             var signinCredentials=new SigningCredentials(key,SecurityAlgorithms.HmacSha256);

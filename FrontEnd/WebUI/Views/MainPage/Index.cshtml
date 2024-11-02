@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .full-height {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            gap: 10px; /* Butonlar arası boşluk */
+        }
+
+        .btn-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+            .btn-section:hover {
+                opacity: 0.9;
+            }
+
+        .btn-profile {
+            background-color: #4A90E2;
+        }
+        /* Mavi */
+        .btn-donors {
+            background-color: #50C878;
+        }
+        /* Yeşil */
+        .btn-request {
+            background-color: #9B9B9B;
+        }
+        /* Gri */
+        .btn-about {
+            background-color: #2C3E50;
+        }
+        /* Koyu Yeşil */
+    </style>
+</head>
+<body>
+    <div class="container-fluid full-height p-0">
+        <a href="/Profile/Index/" class="btn-section btn-profile">Profil</a>
+        <a href="/Donation/Index/" class="btn-section btn-donors">Kan Bağışında Bulun</a>
+        <a href="/request" class="btn-section btn-request">Kan Talep Et</a>
+        <a href="/about" class="btn-section btn-about">Hakkımızda</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

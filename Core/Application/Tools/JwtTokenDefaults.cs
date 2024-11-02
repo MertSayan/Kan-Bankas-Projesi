@@ -10,7 +10,7 @@ namespace Application.Tools
     {
         public const string ValidAudience = "https://locahost";
         public const string ValidIssuer = "https://localhost";
-        public const string Key = "kanBankkAnbanK0101++kanbankası--*naber";
+        public const string Key = "kanBankkAnbanK0101++kanbankasi--*naber";
         public const int Expire = 10; // 10 dk sonra token iptal olacak
 
          

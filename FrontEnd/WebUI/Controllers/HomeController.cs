@@ -1,9 +1,12 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +18,17 @@ namespace WebUI.Controllers
 
         public IActionResult Index()
         {
+            var token=User.Claims.FirstOrDefault(x=>x.Type=="accessToken").Value;
+            var userIdClaim = User.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier);
+            var userId = userIdClaim.Value;
+            //burada token ýn içinden ýd deðerini aldým.
+            if (token != null)
+            {
+                
+                return View();
+            }
+
+            //token ý taþýyabiliyor muyum diye denedim oluyor.
             return View();
         }
 

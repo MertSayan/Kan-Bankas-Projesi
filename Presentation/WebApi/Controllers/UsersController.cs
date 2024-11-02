@@ -26,9 +26,16 @@ namespace WebApi.Controllers
             return Ok(values);
         }
         [HttpGet("email,password")]
-        public async Task<IActionResult> GetUserById(string Email, string Password)
+        public async Task<IActionResult> GetUserByEmailAndPassword(string Email, string Password)
         {
             var values = await _mediator.Send(new GetUserByMailAndPasswordQuery(Email,Password));
+            return Ok(values);
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var values = await _mediator.Send(new GetUserByIdQuery(id));
             return Ok(values);
         }
 
