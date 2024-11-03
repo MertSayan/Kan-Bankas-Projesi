@@ -1,0 +1,192 @@
+﻿
+@model List<GetAllUserDto>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Yönetimi - Kan Bankası</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #343a40;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #dc3545; /* Kan bankası kırmızısı */
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            .table th, .table td {
+                padding: 15px;
+                text-align: center;
+                border: 1px solid #dee2e6;
+            }
+
+            .table th {
+                background-color: #007bff;
+                color: #ffffff;
+            }
+
+        .btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-outline-dark {
+            background-color: #343a40;
+        }
+
+        .btn-outline-info {
+            background-color: #17a2b8;
+        }
+
+        .btn-outline-warning {
+            background-color: #ffc107;
+        }
+
+        .btn-outline-primary {
+            background-color: #007bff;
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .search-bar input {
+                flex: 1;
+                margin-right: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                border: 1px solid #ced4da;
+            }
+
+            .search-bar a {
+                background-color: #28a745;
+                color: #fff;
+                padding: 10px 15px;
+                border-radius: 5px;
+                text-decoration: none;
+            }
+
+                .search-bar a:hover {
+                    opacity: 0.8;
+                }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sisteme Kayıtlı Kullanıcılar</h1>
+
+        <div class="search-bar">
+            <input type="text" class="form-control" placeholder="Kullanıcı ara..." id="searchInput" onkeyup="searchUsers()">
+        </div>
+
+        <div class="section">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Ad</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Telefon</th>
+                        <th>Kan Grubu</th>
+                    </tr>
+                </thead>
+                <tbody id="userTable">
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td class="fw-bold">@user.UserId</td>
+                            <td>@user.Name @user.Surname</td>
+                            <td>@user.Email</td>
+                            <td>
+                                <span class="badge bg-info text-dark">@user.RoleName</span>
+                            </td>
+                            <td>@user.PhoneNumber</td>
+                            <td>
+                                <span class="badge bg-secondary">@user.BloodTypeName</span>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+                <div class="container" style="text-align: center; margin-top: 20px;">
+                    <a href="/AdminMain/Index/" class="btn btn-outline-primary">Geri Dön</a>
+                </div>
+            </table>
+
+        </div>
+    </div>
+
+    <script>
+        function searchUsers() {
+            var input, filter, table, tr, td, i, j, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toLowerCase();
+            table = document.getElementById("userTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                tr[i].style.display = "none"; // Başlangıçta tüm satırları gizle
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValue = td[j].textContent || td[j].innerText;
+                        if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                            tr[i].style.display = ""; // Eşleşen satırları göster
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
