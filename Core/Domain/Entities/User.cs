@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,5 +22,13 @@ namespace Domain.Entities
         public string ImageUrl { get; set; }
         public List<Donation> Donations { get; set; }
         public List<Request> Requests { get; set; }
+
+        [NotMapped]
+        public int TotalDonationsAmount { get; set; }
+
+        [NotMapped]
+        public int TotalRequestsAmount { get; set; }
+
+        //notmapped ler veri tabanında bir değişiklik olmamasını sağlar sadece burada var bunlar.
     }
 }

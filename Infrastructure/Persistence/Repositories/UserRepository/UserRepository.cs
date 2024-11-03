@@ -43,5 +43,25 @@ namespace Persistence.Repositories.UserRepository
             return value;
 
         }
+
+        public async Task<User> GetUserByIdWithRoleAndBloodTypeNameAndDonationAndRequestCount(int id)
+        {
+            var user = await _context.Users
+                .Include(x => x.BloodType)
+                .Include(x => x.Role)
+                .Include(x => x.Donations)
+                .Include(x => x.Requests)
+                .FirstOrDefaultAsync(x => x.UserId == id && x.DeletedDate == null);
+
+            if (user != null)
+            {
+                user.TotalDonationsAmount = user.Donations.Sum(d => d.Amount);
+                user.TotalRequestsAmount = user.Requests.Sum(y=>y.Amount);
+            }
+
+            return user;
+        }
+
+
     }
 }

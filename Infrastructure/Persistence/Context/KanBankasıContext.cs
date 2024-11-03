@@ -36,5 +36,6 @@ namespace Persistence.Context
         public DbSet<Request> Requests { get; set;}
         public DbSet<Role> Roles { get; set;}
         public DbSet<User> Users { get; set;}
+        public DbSet<About> Abouts { get; set;}
     }
 }

@@ -31,6 +31,12 @@ namespace WebApi.Controllers
             var values = await _mediator.Send(new GetUserByMailAndPasswordQuery(Email,Password));
             return Ok(values);
         }
+        [HttpGet("totalcount")]
+        public async Task<IActionResult> GetUserWithTotalCount(int id)
+        {
+            var values = await _mediator.Send(new GetUserByIdWithRoleAndBloodTypeNameAndDonationAndRequestCountQuery(id));
+            return Ok(values);
+        }
 
         [HttpGet("id")]
         public async Task<IActionResult> GetUserById(int id)

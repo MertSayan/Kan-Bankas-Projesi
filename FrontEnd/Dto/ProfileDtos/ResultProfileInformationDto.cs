@@ -15,5 +15,7 @@ namespace Dto.ProfileDtos
         public string BloodTypeName { get; set; }
         public string PhoneNumber { get; set; }
         public string ImageUrl { get; set; }
+        public int TotalDonationsAmount { get; set; }
+        public int TotalRequestAmount { get; set; }
     }
 }

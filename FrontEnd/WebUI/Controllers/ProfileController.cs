@@ -20,7 +20,7 @@ namespace WebUI.Controllers
             var userId = userIdClaim.Value;
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"https://localhost:7072/api/Users/id?id="+userId);
+            var responseMessage = await client.GetAsync($"https://localhost:7072/api/Users/totalcount?id=" +userId);
             if(responseMessage.IsSuccessStatusCode)
             {
                 var jsonData=await responseMessage.Content.ReadAsStringAsync();

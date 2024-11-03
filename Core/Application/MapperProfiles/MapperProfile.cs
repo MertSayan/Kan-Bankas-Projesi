@@ -1,4 +1,6 @@
 ﻿using Application.Enums;
+using Application.Features.Mediatr.Abouts.Commands;
+using Application.Features.Mediatr.Abouts.Results;
 using Application.Features.Mediatr.Users.Commands;
 using Application.Features.Mediatr.Users.Results;
 using AutoMapper;
@@ -28,6 +30,15 @@ namespace Application.MapperProfiles
             CreateMap<GetUserByIdQueryResult, User>().ReverseMap()
                 .ForMember(dest => dest.BloodTypeName, opt => opt.MapFrom(src => src.BloodType.BloodName))
                 .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.RoleName));
+            CreateMap<GetUserByIdWithRoleAndBloodTypeNameAndDonationAndRequestCountQueryResult, User>().ReverseMap()
+                .ForMember(dest => dest.BloodTypeName, opt => opt.MapFrom(src => src.BloodType.BloodName))
+                .ForMember(dest => dest.RoleName, opt => opt.MapFrom(src => src.Role.RoleName));
+
+
+
+            CreateMap<About, GetAboutUsQueryResult>().ReverseMap();
+            CreateMap<About, CreateAboutCommand>().ReverseMap();
+            CreateMap<About, UpdateAboutCommand>().ReverseMap();
         }
     }
 }

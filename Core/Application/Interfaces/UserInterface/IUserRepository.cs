@@ -13,5 +13,6 @@ namespace Application.Interfaces.UserInterface
         Task<List<User>> GetAllUserWithRoleAndBloodTypeName();
         Task<User> GetUserByIdWithRoleAndBloodTypeName(int id);
         Task<User> GetByFilterAsync(Expression<Func<User, bool>> filter);
+        Task<User> GetUserByIdWithRoleAndBloodTypeNameAndDonationAndRequestCount(int id);
     }
 }

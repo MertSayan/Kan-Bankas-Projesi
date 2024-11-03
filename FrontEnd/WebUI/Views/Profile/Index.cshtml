@@ -78,8 +78,15 @@
     <div class="container mt-5">
         <!-- Profil Kartı -->
         <div class="profile-card">
-            <div class="profile-image">
-                <i class="bi bi-person"></i>
+            <div class="profile-image" >
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" alt="Profile Image" class="img-fluid rounded-circle" />
+                }
+                else
+                {
+                    <i class="bi bi-person"></i>
+                }
             </div>
             <div class="profile-info">
                 <div>
@@ -100,7 +107,7 @@
             <div class="col-md-6">
                 <div class="card text-center p-4">
                     <div class="circle donation-circle">
-                        40
+                        @Model.TotalDonationsAmount
                     </div>
                     <h5>Bağış Miktarı (Serum)</h5>
                 </div>
@@ -108,9 +115,9 @@
             <div class="col-md-6">
                 <div class="card text-center p-4">
                     <div class="circle saved-circle">
-                        30
+                        @(Model.TotalDonationsAmount * 3)
                     </div>
-                    <h5>Kurtarılan İnsanlar (Kişi)</h5>
+                    <h5>Potansiyel Kurtarılan İnsanlar (Kişi)</h5>
                 </div>
             </div>
         </div>

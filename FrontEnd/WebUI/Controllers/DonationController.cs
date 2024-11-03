@@ -68,7 +68,7 @@ namespace WebUI.Controllers
             var responseMessage = await client.PostAsync("https://localhost:7072/api/Donations", stringContent);
             if(responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index", "MainPage");
+                return RedirectToAction("IstekBasarılı", "Request");
             }
             return View();
         }
